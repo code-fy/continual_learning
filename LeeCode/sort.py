@@ -122,5 +122,50 @@ def select_dort(l):
 
 
 
+"""
+堆数据结构
+再到堆排序
+最大堆：完全二叉树的每个根结点的值都大于或等于其叶子结点
+最小堆：完全二叉树的每一个根节点的值都小于其叶子结点
+完全二叉树特点： 左节点 = 2n+1， 右节点= 左节点+1
+堆的最后一个非叶子结点下标为 arr.size / 2 -1
+"""
+
+# 堆排序
+
+def heapify(arr, n, i): 
+    largest = i  
+    l = 2 * i + 1     # left = 2*i + 1 
+    r = 2 * i + 2     # right = 2*i + 2 
+  
+    if l < n and arr[i] < arr[l]: 
+        largest = l 
+  
+    if r < n and arr[largest] < arr[r]: 
+        largest = r 
+  
+    if largest != i: 
+        arr[i],arr[largest] = arr[largest],arr[i]  # 交换
+  
+        heapify(arr, n, largest) 
+  
+def heapSort(arr): 
+    n = len(arr) 
+  
+    # Build a maxheap. 
+    for i in range(n, -1, -1): 
+        heapify(arr, n, i) 
+  
+    # 一个个交换元素
+    for i in range(n-1, 0, -1): 
+        arr[i], arr[0] = arr[0], arr[i]   # 交换
+        heapify(arr, i, 0) 
+  
+arr = [ 12, 11, 13, 5, 6, 7] 
+heapSort(arr) 
+n = len(arr) 
+print ("排序后") 
+for i in range(n): 
+    print ("%d" %arr[i])
 
 
