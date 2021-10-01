@@ -131,41 +131,92 @@ def select_dort(l):
 堆的最后一个非叶子结点下标为 arr.size / 2 -1
 """
 
-# 堆排序
+def duiSort(l):
+    heapfy(l)
+    for i in range(len(l)-1, -1,-1):
+        l[0],l[i] = l[i],l[0]
+        makeMaxHeap(0,l,i)
+    return l
 
-def heapify(arr, n, i): 
-    largest = i  
-    l = 2 * i + 1     # left = 2*i + 1 
-    r = 2 * i + 2     # right = 2*i + 2 
-  
-    if l < n and arr[i] < arr[l]: 
-        largest = l 
-  
-    if r < n and arr[largest] < arr[r]: 
-        largest = r 
-  
-    if largest != i: 
-        arr[i],arr[largest] = arr[largest],arr[i]  # 交换
-  
-        heapify(arr, n, largest) 
-  
-def heapSort(arr): 
-    n = len(arr) 
-  
-    # Build a maxheap. 
-    for i in range(n, -1, -1): 
-        heapify(arr, n, i) 
-  
-    # 一个个交换元素
-    for i in range(n-1, 0, -1): 
-        arr[i], arr[0] = arr[0], arr[i]   # 交换
-        heapify(arr, i, 0) 
-  
-arr = [ 12, 11, 13, 5, 6, 7] 
-heapSort(arr) 
-n = len(arr) 
-print ("排序后") 
-for i in range(n): 
-    print ("%d" %arr[i])
+
+def heapfy(l):
+    # 最后一个非叶子结点    
+    node = len(l) // 2 -1
+    for i in range(node, -1,-1):
+        makeMaxHeap(i,l,len(l))
+        
+def makeMaxHeap(index, arr, arrSize):
+    left = index * 2 + 1
+    right = left + 1
+    largest = index
+    if (left < arrSize and arr[left] > arr[largest]):
+        largest = left
+    if (right < arrSize and arr[right] > arr[largest]):
+        largest = right
+    if (largest != index):
+        arr[largest], arr[index] = arr[index], arr[largest]
+        makeMaxHeap(index,arr,arrSize)
+    
+"""
+快排
+手写
+"""
+
+def quickSort(l, start, end):
+
+    while start >= end:
+        return
+    left = start
+    right = end
+    mid = l[left]
+    while (left < right):
+        while(left < right and l[right] >= mid):
+            right -= 1
+        l[left] = l[right]
+
+        while(left < right and l[left] < mid):
+            left += 1
+        l[right] = l[left]
+
+    l[left] = mid
+    quickSort(l,start, left-1)
+    quickSort(l,left+1, end)
+
+if __name__ == '__main__':
+    l = [4,3,2]
+    quickSort(l, 0, 2)
+    print(l)
+    l.sort(reverse=True)
+    print(l)
+
+
+# def kPai(l,start, end):
+#     while(start >= end):
+#         return
+#     left = start
+#     right = end
+#     mid = l[left]
+
+#     while(left < right and l[right] >= mid):
+#         right -= 1
+#     l[left] = l[right]
+
+#     while(left < right and l[left] < mid):
+#         left += 1
+#     l[right] = l[left]
+
+#     l[left] = mid
+
+#     kPai(l,start,left-1)
+#     kPai(l,left+1, end)
+
+# if __name__ == '__main__':
+#     l = [9,8,7]
+#     kPai(l,0,2)
+#     print(l)
+
+
+
+
 
 
