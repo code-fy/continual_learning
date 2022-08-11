@@ -17,7 +17,7 @@ class MyLink():
         if 0<=index<self.count:
             for _ in range(index +1):
                 node = node.next
-                return node.val
+            return node.val
         else:
             return -1
 
@@ -56,6 +56,22 @@ class MyLink():
             else:
                 prev_node.next,current_node.next = current_node.next, None
 
+# 测试
+def gen_link(n):
+    link_node = MyLink()
+    for i in range(n):
+        link_node.add_at_index(i,i)
+    return link_node
+
+def cur():
+    l = gen_link(5)
+    while l:
+        print(l.val)
+        l = l.next
+
+l = gen_link(9)
+# print(l.get(4))
+
 
 # 双链表
 class Dnode():
@@ -68,7 +84,7 @@ class MyDnode():
 
     def __init__(self):
         self.head,self.tail = Dnode(0), Dnode(0)
-        self.head.next, self.tail.next = self.tail, self.head
+        self.head.next, self.tail.prev = self.tail, self.head
         self.count = 0
 
     def get_node(self,index):
@@ -121,17 +137,24 @@ class MyDnode():
             node.prev.next,node.next.prev = node.next,node.prev
 
 
+# 测试
+def gen_dlink(n):
+    mdlink = MyDnode()
+    for i in range(n):
+        mdlink.add_at_index(i,i)
+    return mdlink
 
+def all_func():
+    dl = gen_dlink(5)
+    n = dl.get_node(3)
+    print(n.val)
+    print(n.prev.val)
+    print(n.next.val)
+    print(dl.tail.val)
+    dl.del_at_index(dl.count-1)
+    print(dl.tail.val)
 
-
-
-
-
-
-
-
-
-
+all_func()
 
 
 """
