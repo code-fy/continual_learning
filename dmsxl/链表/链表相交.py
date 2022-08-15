@@ -7,7 +7,7 @@
 def get_intersection_node(heada,headb):
     """
     
-    :return: 
+    :return:   
     """"""
     根据快慢法则，走的快的一定会追上走得慢的。
     在这道题里，有的链表短，他走完了就去走另一条链表，我们可以理解为走的快的指针。
