@@ -27,7 +27,7 @@ def get_intersection_node(heada,headb):
 
         curb = curb.next if curb else heada
 
-    return cura
+    return
 
 
 
