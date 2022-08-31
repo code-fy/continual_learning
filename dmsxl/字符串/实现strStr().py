@@ -29,3 +29,49 @@ def str_str(s,t):
 
 
 print(str_str("hello", "ll"))
+"""
+kmp 解题
+"""
+def get_next(next,s):
+
+    j=0
+    next[0] =0
+    for i in range(1,len(s)):
+
+        while(j >0 and s[i] != s[j]):
+            j = next[j-1]
+
+        if s[i] == s[j]:
+            j +=1
+
+        next[i] = j
+
+    return next
+
+
+def kmp_str(s,t):
+    next = [0] * len(t)
+    next = get_next(next,t)
+    j = 0
+
+    # 情况一 模式串与文本串 不匹配，且j>0 退回next数组下标
+    for i in range(len(s)):
+        while(j >0 and s[i] != t[j]):
+            j = next[j-1]
+
+        if s[i] == t[j]:
+            j +=1
+
+        if j == (len(t)):
+            return i - len(t) +1
+
+print(kmp_str("hello", "ll"))
+
+
+
+
+
+
+
+
+
